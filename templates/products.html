@@ -4,22 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Products</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!-- <h4>Product detail: {{productid}}</h4> -->
     <h1>All Products</h1>
     <a href="/addproduct">Add product</a>
-    <table border="1">
+    <table class="table table-striped">
       <tr>
+        <th>Id</th>
         <th>Name</th>
         <th>Price</th>
         <th>Quantity</th>
+        <th>Delete</th>
       </tr>
       {% for item in products %}
       <tr>
+        <td>{{item.id}}</td>
         <td>{{item.name}}</td>
         <td>{{item.price}}</td>
         <td>{{item.quantity}}</td>
+        <td><a href="deleteproduct/">Delete</a></td>
       </tr>
       {% endfor %}
     </table>
