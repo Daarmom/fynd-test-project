@@ -8,7 +8,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def homepage():
-    # add_Product()
     get_Product()
     return render_template('homepage.html')
 
@@ -35,15 +34,18 @@ def product_get():
         return page
 
     
-@app.get("/addproducts/")
+@app.get("/addproduct/")
 def product_add():
-    add_Product()
-    return "<h2> Add products </h2>"
+    return render_template('addProduct.html')
 
 
-@app.post("/products/")
+@app.post("/addproduct/")
 def product_post():
-        return "<h1> Products Post </h1>"
+    name = request.form['name']
+    price = int(request.form['price'])
+    quantity = int(request.form['quantity'])
+    add_Product(name, price, quantity)
+    return "<h2> Product Added </h2>"
 
 @app.route("/products/<int:id>")
 def product(id):
@@ -88,9 +90,8 @@ def user(username):
 def about(subpath):
     return f"<h1> Path: #{escape(subpath)} </h1>"
 
-def add_Product():
-    random_number = random.randint(10, 99)
-    product = Products(name = f"Product- {random_number}", price = random_number, quantity = random_number)
+def add_Product(name, price, quantity):
+    product = Products(name = name, price = price, quantity = quantity)
     session.add(product)
     session.commit()
 
