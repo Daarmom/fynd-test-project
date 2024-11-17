@@ -51,6 +51,15 @@ def product_post():
     add_Product(name, price, quantity)
     return "<h2> Product Added </h2>"
 
+@app.get("/deleteproduct/<int:id>/")
+def deleteProduct(id):
+    products = get_Product()
+    product = session.query(Products).filter_by(id=id).first()
+    session.delete(product)
+    session.commit()
+    # return "<h2> Product deleted </h2>"
+    return render_template('products.html', products = products)
+
 @app.route("/products/<int:id>")
 def product(id):
     return render_template('products.html', productid = id)
@@ -75,7 +84,6 @@ def users_get():
     firstName = request.args.get('fname')
     lastName = request.args.get('lname', default="")
     print(request.args)
-    # users = get_Users()
     # do whatever you want with the values
     return f"<h1> Users page: {firstName} {lastName} </h1>"
 
