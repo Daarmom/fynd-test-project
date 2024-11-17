@@ -71,10 +71,23 @@ def users_get():
     firstName = request.args.get('fname')
     lastName = request.args.get('lname', default="")
     print(request.args)
+    # users = get_Users()
     # do whatever you want with the values
     return f"<h1> Users page: {firstName} {lastName} </h1>"
 
-@app.post("/users/")
+# @app.post("/users/")
+# def users_post():
+#     firstName = request.form['fname']
+#     lastName = request.form['lname']
+#     print(request.form)
+#     # do whatever you want with the values
+#     return f"<h1> Users page: {firstName} {lastName} </h1>"
+
+@app.get("/addusers/")
+def user_add():
+    return render_template('addUser.html')
+
+@app.post("/adduser/")
 def users_post():
     firstName = request.form['fname']
     lastName = request.form['lname']
