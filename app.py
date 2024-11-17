@@ -23,15 +23,19 @@ def greet(name = None):
 #     else:
 #         return "<h1> Products </h1>"
     
+# @app.get("/products/")
+# def product_get():
+#         products = get_Product()
+#         page = "<h1> Products Get</h1>"
+#         page += '<ul>'
+#         for product in products:
+#             page += f'<li>{product.name} </li>'
+#         page += '</ul>'
+#         return page
 @app.get("/products/")
 def product_get():
         products = get_Product()
-        page = "<h1> Products Get</h1>"
-        page += '<ul>'
-        for product in products:
-            page += f'<li>{product.name} </li>'
-        page += '</ul>'
-        return page
+        return render_template('products.html', products = products)
 
     
 @app.get("/addproduct/")
